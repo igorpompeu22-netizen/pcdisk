@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rota Livre — by PCDisk: saiba antes de sair se um lugar é acessível para você, siga a rota acessível e transforme cada barreira em um registro com a norma violada.">
+  <meta name="theme-color" content="#0b5cad">
+  <title>Rota Livre — by PCDisk</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230b5cad'/><text x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial'>R</text></svg>">
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <header class="topo">
+    <div class="topo-linha">
+      <a href="#/" class="marca" aria-label="Rota Livre — by PCDisk, página inicial">
+        <span class="marca-logo" aria-hidden="true">R</span>
+        <span><strong>Rota Livre</strong><small>by PCDisk</small></span>
+      </a>
+      <div class="ferramentas" role="toolbar" aria-label="Acessibilidade">
+        <button type="button" data-a11y="menos" aria-label="Diminuir texto">A−</button>
+        <button type="button" data-a11y="mais" aria-label="Aumentar texto">A+</button>
+        <button type="button" data-a11y="contraste" aria-pressed="false" aria-label="Alto contraste"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+        <button type="button" data-a11y="voz" aria-label="Comando de voz" title="Comando de voz">🎤</button>
+      </div>
+    </div>
+    <nav aria-label="Principal">
+      <ul class="menu">
+        <li><a href="#/painel">Painel agora</a></li>
+        <li><a href="#/locais">Locais</a></li>
+        <li><a href="#/rota">Rota</a></li>
+        <li><a href="#/relatar" class="menu-destaque">Relatar barreira</a></li>
+        <li><a href="#/registros">Meus registros</a></li>
+        <li><a href="#/direitos">Direitos</a></li>
+        <li><a href="#/eventos">Eventos</a></li>
+        <li><a href="#/perfil">Meu perfil</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="faixa-perfil"></div>
+  <main id="conteudo" tabindex="-1"></main>
+  <footer class="rodape">
+    <p><strong>Rota Livre — by PCDisk</strong> · Equipe C169BA · LegalTech para acessibilidade PCD · Gratuito para a pessoa com deficiência.</p>
+    <p>O app orienta e encaminha; não presta consultoria nem representação jurídica. Rotas são orientação, não garantia.</p>
+    <p><a href="#/empresa">Área do estabelecimento</a> · <a href="#/moderacao">Moderação</a> · <a href="#/indicadores">Testes e indicadores</a> · <a href="#/sobre">Sobre e privacidade</a></p>
+  </footer>
+  <div id="anuncio" class="sr" aria-live="polite"></div>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
