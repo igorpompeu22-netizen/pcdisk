@@ -75,9 +75,17 @@ export async function render(main) {
   });
 
   await carregar();
-  return aoVivo(async (tipo, dados) => {
+  // Reserva: se o tempo real cair (ex.: hospedagem serverless), atualiza a cada 30 s.
+  const intervalo = setInterval(() => {
+    if (!lista.querySelector('form.mudar:not([hidden])')) carregar();
+  }, 30000);
+  const parar = aoVivo(async (tipo, dados) => {
     if (tipo !== 'equipamento') return;
     await carregar(dados.id);
     anunciar(`Atualização: ${dados.nome} — ${STATUS_EQUIP[dados.status]?.rotulo}.`);
   });
+  return () => {
+    clearInterval(intervalo);
+    parar();
+  };
 }

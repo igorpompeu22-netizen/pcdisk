@@ -34,6 +34,8 @@ export function createApp({ dataDir, adminToken = process.env.ADMIN_TOKEN || 'ad
   const store = createStore(dataDir, semSeed ? null : seed);
   const app = express();
   app.disable('x-powered-by');
+  // Atrás do proxy da Vercel: usa o https original para montar o link do QR.
+  app.set('trust proxy', true);
   app.use(express.json({ limit: '6mb' }));
 
   // ---------- Tempo real (Server-Sent Events) ----------
@@ -48,8 +50,11 @@ export function createApp({ dataDir, adminToken = process.env.ADMIN_TOKEN || 'ad
     res.write('retry: 5000\n\n');
     clientes.add(res);
     const ping = setInterval(() => res.write(': ping\n\n'), 25000);
+    // Em ambiente serverless a função tem tempo máximo: encerra antes e o navegador reconecta sozinho.
+    const limite = process.env.VERCEL ? setTimeout(() => res.end(), 50000) : null;
     req.on('close', () => {
       clearInterval(ping);
+      clearTimeout(limite);
       clientes.delete(res);
     });
   });
@@ -494,7 +499,11 @@ export function createApp({ dataDir, adminToken = process.env.ADMIN_TOKEN || 'ad
   app.use((err, req, res, next) => {
     const status = err.status ?? err.statusCode ?? 500;
     if (status >= 500) console.error(err);
-    res.status(status).json({ erro: status >= 500 ? 'Erro interno.' : err.message });
+    let erro = err.message;
+    if (status >= 500) erro = 'Erro interno.';
+    else if (!(err instanceof HttpError) && status === 404) erro = 'Não encontrado.';
+    else if (status === 413 && !(err instanceof HttpError)) erro = 'Envio muito grande.';
+    res.status(status).json({ erro });
   });
 
   app.locals.store = store;

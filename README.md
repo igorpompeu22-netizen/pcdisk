@@ -66,6 +66,10 @@ Variáveis de ambiente opcionais: `PORT` (padrão 3000), `DATA_DIR` (padrão `./
 
 Os dados ficam em `data/db.json`, e as fotos em `data/uploads/`. Apague a pasta `data/` para voltar aos dados de demonstração.
 
+### Publicar na internet
+
+Veja o passo a passo em **[DEPLOY.md](DEPLOY.md)** (Vercel). O projeto já inclui `vercel.json` e `api/index.js`.
+
 ### Acessos de demonstração
 
 | Área | Código |
@@ -86,6 +90,8 @@ Os dados ficam em `data/db.json`, e as fotos em `data/uploads/`. Apague a pasta 
 ## Arquitetura
 
 ```
+api/index.js    entrada da função serverless na Vercel
+vercel.json     rotas da Vercel (site estático + API)
 server/
   app.js        API REST + SSE (Express 5)
   catalog.js    itens NBR 9050, perfis, categorias de barreira → normas, canais
